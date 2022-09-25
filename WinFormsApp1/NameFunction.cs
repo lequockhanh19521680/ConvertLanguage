@@ -19,7 +19,9 @@ namespace WinFormsApp1
 
         public string GetName() { return name; }
         public string GetColor() { return color; }
-        public void SetName(String name) { this.name = name; }
+        public void SetName(String name1) {
+            name1 = name1.Replace(" ", "");
+            this.name = name1; }
 
     }
 }

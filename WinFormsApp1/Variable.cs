@@ -12,6 +12,11 @@ namespace WinFormsApp1
         string dataType;
         string color;
 
+        public Variable()
+        {
+            name = "";
+            dataType = "";
+        }
         public Variable(string name1, string dataType)
         {
             name = name1;

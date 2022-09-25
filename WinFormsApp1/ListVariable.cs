@@ -10,6 +10,12 @@ namespace WinFormsApp1
     {
         List<Variable> listVariable;
         Variable result;
+
+        public ListVariable()
+        {
+            this.listVariable = new List<Variable>();
+            this.result = new Variable();
+        }
         public ListVariable(List<Variable> listVariable, Variable result)
         {
             this.listVariable = listVariable;

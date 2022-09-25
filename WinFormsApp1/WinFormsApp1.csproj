@@ -8,4 +8,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="StringAnalysis.cs~RF1f8b32f.TMP" />
+  </ItemGroup>
+
 </Project>

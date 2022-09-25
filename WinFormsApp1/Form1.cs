@@ -19,7 +19,7 @@ namespace WinFormsApp1
                 textInput.Text=File.ReadAllText(openFile.FileName.ToString());
             }
             stringAnalysis = new StringAnalysis(textInput.Text.Split(new Char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries));
-
+            stringAnalysis.EncoderInputFirst(stringAnalysis.GetString()[0]);
         }
 
         private void textOutput_TextChanged(object sender, EventArgs e)
