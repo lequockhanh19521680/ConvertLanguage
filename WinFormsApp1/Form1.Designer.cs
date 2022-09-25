@@ -1,6 +1,6 @@
 ﻿namespace WinFormsApp1
 {
-    partial class Form1
+    partial class MainProject
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainProject));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFile = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,7 +47,7 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textInput = new System.Windows.Forms.TextBox();
             this.panelContainer1 = new System.Windows.Forms.Panel();
             this.panelButton = new System.Windows.Forms.Panel();
             this.convertBtn = new System.Windows.Forms.Button();
@@ -56,9 +56,9 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.panelLabel = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.ClassName = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textOutput = new System.Windows.Forms.TextBox();
             this.menuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -86,7 +86,7 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
-            this.openToolStripMenuItem,
+            this.openFile,
             this.saveToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -99,11 +99,12 @@
             this.newToolStripMenuItem.Size = new System.Drawing.Size(128, 26);
             this.newToolStripMenuItem.Text = "New";
             // 
-            // openToolStripMenuItem
+            // openFile
             // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(128, 26);
-            this.openToolStripMenuItem.Text = "Open";
+            this.openFile.Name = "openFile";
+            this.openFile.Size = new System.Drawing.Size(128, 26);
+            this.openFile.Text = "Open";
+            this.openFile.Click += new System.EventHandler(this.openFile_Click);
             // 
             // saveToolStripMenuItem
             // 
@@ -219,7 +220,7 @@
             // 
             this.panel3.BackColor = System.Drawing.Color.Transparent;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.textBox2);
+            this.panel3.Controls.Add(this.textInput);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(20, 145);
             this.panel3.Name = "panel3";
@@ -227,14 +228,15 @@
             this.panel3.Size = new System.Drawing.Size(466, 447);
             this.panel3.TabIndex = 1;
             // 
-            // textBox2
+            // textInput
             // 
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Location = new System.Drawing.Point(20, 20);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(424, 405);
-            this.textBox2.TabIndex = 0;
+            this.textInput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textInput.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.textInput.Location = new System.Drawing.Point(20, 20);
+            this.textInput.Multiline = true;
+            this.textInput.Name = "textInput";
+            this.textInput.Size = new System.Drawing.Size(424, 405);
+            this.textInput.TabIndex = 0;
             // 
             // panelContainer1
             // 
@@ -269,6 +271,7 @@
             this.convertBtn.TabIndex = 0;
             this.convertBtn.Text = "Convert";
             this.convertBtn.UseVisualStyleBackColor = true;
+            this.convertBtn.Click += new System.EventHandler(this.convertBtn_Click);
             // 
             // panelText
             // 
@@ -300,7 +303,7 @@
             // panelLabel
             // 
             this.panelLabel.Controls.Add(this.label2);
-            this.panelLabel.Controls.Add(this.label1);
+            this.panelLabel.Controls.Add(this.ClassName);
             this.panelLabel.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLabel.Location = new System.Drawing.Point(20, 20);
             this.panelLabel.Name = "panelLabel";
@@ -312,29 +315,29 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(5, 58);
+            this.label2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(5, 59);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(117, 18);
+            this.label2.Size = new System.Drawing.Size(111, 17);
             this.label2.TabIndex = 1;
             this.label2.Text = "Exe File Name: ";
             // 
-            // label1
+            // ClassName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(5, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(99, 18);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Class Name: ";
+            this.ClassName.AutoSize = true;
+            this.ClassName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ClassName.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ClassName.Location = new System.Drawing.Point(5, 10);
+            this.ClassName.Name = "ClassName";
+            this.ClassName.Size = new System.Drawing.Size(99, 18);
+            this.ClassName.TabIndex = 0;
+            this.ClassName.Text = "Class Name: ";
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Transparent;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel2.Controls.Add(this.textBox1);
+            this.panel2.Controls.Add(this.textOutput);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(510, 55);
             this.panel2.Name = "panel2";
@@ -342,16 +345,18 @@
             this.panel2.Size = new System.Drawing.Size(283, 596);
             this.panel2.TabIndex = 3;
             // 
-            // textBox1
+            // textOutput
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(20, 20);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(239, 552);
-            this.textBox1.TabIndex = 0;
+            this.textOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textOutput.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textOutput.Location = new System.Drawing.Point(20, 20);
+            this.textOutput.Multiline = true;
+            this.textOutput.Name = "textOutput";
+            this.textOutput.Size = new System.Drawing.Size(239, 552);
+            this.textOutput.TabIndex = 0;
+            this.textOutput.TextChanged += new System.EventHandler(this.textOutput_TextChanged);
             // 
-            // Form1
+            // MainProject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -361,8 +366,8 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "MainProject";
+            this.Text = "MainProject";
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -388,7 +393,7 @@
         private MenuStrip menuStrip;
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem newToolStripMenuItem;
-        private ToolStripMenuItem openToolStripMenuItem;
+        private ToolStripMenuItem openFile;
         private ToolStripMenuItem saveToolStripMenuItem;
         private ToolStripMenuItem exitToolStripMenuItem;
         private ToolStripMenuItem editToolStripMenuItem;
@@ -403,7 +408,7 @@
         private ToolStripLabel toolStripLabel1;
         private Panel panel1;
         private Panel panel2;
-        private TextBox textBox1;
+        private TextBox textOutput;
         private Panel panelContainer1;
         private Panel panelButton;
         private Panel panelText;
@@ -411,9 +416,9 @@
         private TextBox textBox4;
         private TextBox textBox3;
         private Label label2;
-        private Label label1;
+        private Label ClassName;
         private Panel panel3;
-        private TextBox textBox2;
+        private TextBox textInput;
         private Button convertBtn;
     }
 }
