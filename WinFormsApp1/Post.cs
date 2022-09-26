@@ -8,7 +8,7 @@ namespace WinFormsApp1
 {
     internal class Post : Text
     {
-        public Post(string name) : base(name)
+        public Post(string name1) : base(name1)
         {
         }
 

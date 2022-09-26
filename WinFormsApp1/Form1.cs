@@ -18,11 +18,13 @@ namespace WinFormsApp1
             stringAnalysis.Clear();
             if(openFile.ShowDialog() == DialogResult.OK)
             {
+                convertBtn.Text = "Convert";
                 textInput.Text=File.ReadAllText(openFile.FileName.ToString());
             }
             
             stringAnalysis.EncoderInputFirst(textInput.Text.Split(new Char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries));
             textInput.Text = "";
+            textOutput.Text = "";
             ChangeColorInput();
         }
 
@@ -33,19 +35,26 @@ namespace WinFormsApp1
 
         private void convertBtn_Click(object sender, EventArgs e)
         {
-            if((textClassName.Text=="") || (textExeFileName.Text==""))
+            if (convertBtn.Text == "Convert")
             {
-                MessageBox.Show("Classname trôìng hoac textExeFileName trong");
+                if ((textClassName.Text == "") || (textExeFileName.Text == ""))
+                {
+                    MessageBox.Show("Classname trôìng hoac textExeFileName trôìng");
+                }
+                else
+                {
+                    if (textInput.Text == "")
+                    {
+                        MessageBox.Show("Input biò trôìng");
+                    }
+                    else
+                    {
+                        convertBtn.Text = "Run";
+                        DecoderTextInput();
+                    }
+                }
             }
             
-            if (textInput.Text == "")
-            {
-                MessageBox.Show("Input biò trôìng");
-            }
-            else {
-                convertBtn.Text = "Run";
-                DecoderTextInput();
-            }
 
         }
         public static void AppendText(RichTextBox box, string text, Color color)
@@ -73,9 +82,9 @@ namespace WinFormsApp1
                 Color colorVariableName = Color.FromName(variable.GetColor());
                 Color colorVariableType = Color.FromName(variable.GetColorDataType());
 
-                AppendText(textInput, variable.GetName(), colorVariableName);
+                AppendText(textInput,variable.GetName(), colorVariableName);
                 textInput.AppendText(":");
-                AppendText(textInput, variable.GetDataType(), colorVariableType);
+                AppendText(textInput,variable.GetDataType().Trim(), colorVariableType);
                 if (index < stringAnalysis.GetVariables().GetCountVariable())
                 {
                     textInput.AppendText(",");
@@ -91,6 +100,7 @@ namespace WinFormsApp1
             AppendText(textInput, result.GetName(), colorResultName);
             textInput.AppendText(":");
             AppendText(textInput, result.GetDataType(), colorResultType);
+          
 
             Pre preTemp = new Pre(stringAnalysis.GetPre().GetName());
             Post postTemp = new Post(stringAnalysis.GetPost().GetName());
@@ -107,13 +117,80 @@ namespace WinFormsApp1
             textInput.AppendText("post ");
             AppendText(textInput, postTemp.GetName(), colorPost);
 
+           
 
         }
 
         private void DecoderTextInput()
         {
-            
+            AppendText(textOutput, "using ", Color.Blue);
+            textOutput.AppendText("System;" + "\n");
+            AppendText(textOutput, "namespace ", Color.Blue);
+            textOutput.AppendText("FormalSpecification" + "\n");
+            textOutput.AppendText("{" + "\n");
+
+            AppendText(textOutput, "    public class ", Color.Blue);
+            AppendText(textOutput, textClassName.Text + "\n", Color.Red);
+            textOutput.AppendText("    {" + "\n");
+
+            NhapText();
+            XuatText();
+
+            textOutput.AppendText("    }" + "\n");
+            textOutput.AppendText("}");
+
+
+
+
+
+
+
         }
+
+
+        private void NhapText()
+        {
+            AppendText(textOutput, "        public void ", Color.Blue);
+            textOutput.AppendText("Nhap_" + stringAnalysis.GetNameFunction().GetName());
+            textOutput.AppendText("(");
+
+            int index = 0;
+            foreach (Variable variable in stringAnalysis.GetVariables().GetVariables())
+            {
+                index++;
+                AppendText(textOutput, "ref " + variable.GetRealDataType(variable.GetDataType()), Color.Blue);
+                textOutput.AppendText(" ");
+                textOutput.AppendText(variable.GetName());
+                if (index < stringAnalysis.GetVariables().GetCountVariable())
+                {
+                    textOutput.AppendText(",");
+                }
+            }
+            textOutput.AppendText(")" + "\n");
+            textOutput.AppendText("        {" + "\n");
+
+            foreach (Variable variable in stringAnalysis.GetVariables().GetVariables())
+            {
+                AppendText(textOutput, "            Console", Color.Cyan);
+                textOutput.AppendText(".WriteLine" + "(" + "\"" + "Nhap " + variable.GetName() + " : " + "\"); " + "\n");
+                textOutput.AppendText("            " + variable.GetName() + " = ");
+                AppendText(textOutput, variable.GetRealDataType(variable.GetDataType()), Color.Blue);
+                textOutput.AppendText(".Parse(");
+                AppendText(textOutput, "Console", Color.Cyan);
+                textOutput.AppendText(".ReadLine());" + "\n");
+            }
+            textOutput.AppendText("        }" + "\n");
+        }
+
+
+
+        private void XuatText()
+        {
+            AppendText(textOutput, "        public void ", Color.Blue);
+            textOutput.AppendText("Xuat_" + stringAnalysis.GetNameFunction().GetName());
+            textOutput.AppendText("(");
+        }
+
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
 

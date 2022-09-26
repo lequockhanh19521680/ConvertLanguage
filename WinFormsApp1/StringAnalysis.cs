@@ -40,12 +40,12 @@ namespace WinFormsApp1
             foreach(string s in split3)
             {
                 string[] split4 = s.Split(':');
-                Variable newTemp = new Variable(split4[0], split4[1]);
+                Variable newTemp = new Variable(split4[0],split4[1]);
                 variables.PushNewVariable(newTemp);
             }
 
             string[] splitResult = split2[1].Split(':');
-            variables.SetResult(splitResult[0], splitResult[1]);
+            variables.SetResult(splitResult[0],splitResult[1]);
             //
             string[] splitPre = temp[1].Split("pre");
 
@@ -59,8 +59,6 @@ namespace WinFormsApp1
 
             string[] splitPost = set.Split("post");
             post.SetName(splitPost[1]);
-            
-
         }
         public Pre GetPre() { return pre; }
         public Post GetPost() { return post; }

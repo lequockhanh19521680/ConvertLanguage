@@ -78,7 +78,7 @@
             this.editToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(793, 28);
+            this.menuStrip.Size = new System.Drawing.Size(965, 28);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -138,7 +138,7 @@
             this.toolStripLabel1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(793, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(965, 27);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -213,7 +213,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 55);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(20, 20, 20, 0);
-            this.panel1.Size = new System.Drawing.Size(510, 596);
+            this.panel1.Size = new System.Drawing.Size(527, 596);
             this.panel1.TabIndex = 2;
             // 
             // panel3
@@ -225,7 +225,7 @@
             this.panel3.Location = new System.Drawing.Point(20, 145);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(20);
-            this.panel3.Size = new System.Drawing.Size(466, 447);
+            this.panel3.Size = new System.Drawing.Size(483, 447);
             this.panel3.TabIndex = 1;
             // 
             // textInput
@@ -235,7 +235,7 @@
             this.textInput.Location = new System.Drawing.Point(20, 20);
             this.textInput.Name = "textInput";
             this.textInput.ReadOnly = true;
-            this.textInput.Size = new System.Drawing.Size(424, 405);
+            this.textInput.Size = new System.Drawing.Size(441, 405);
             this.textInput.TabIndex = 1;
             this.textInput.Text = "";
             // 
@@ -250,17 +250,17 @@
             this.panelContainer1.Location = new System.Drawing.Point(20, 20);
             this.panelContainer1.Name = "panelContainer1";
             this.panelContainer1.Padding = new System.Windows.Forms.Padding(20);
-            this.panelContainer1.Size = new System.Drawing.Size(466, 125);
+            this.panelContainer1.Size = new System.Drawing.Size(483, 125);
             this.panelContainer1.TabIndex = 0;
             // 
             // panelButton
             // 
             this.panelButton.Controls.Add(this.convertBtn);
             this.panelButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelButton.Location = new System.Drawing.Point(314, 20);
+            this.panelButton.Location = new System.Drawing.Point(321, 20);
             this.panelButton.Name = "panelButton";
             this.panelButton.Padding = new System.Windows.Forms.Padding(25);
-            this.panelButton.Size = new System.Drawing.Size(128, 81);
+            this.panelButton.Size = new System.Drawing.Size(138, 81);
             this.panelButton.TabIndex = 2;
             // 
             // convertBtn
@@ -268,7 +268,7 @@
             this.convertBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.convertBtn.Location = new System.Drawing.Point(25, 25);
             this.convertBtn.Name = "convertBtn";
-            this.convertBtn.Size = new System.Drawing.Size(78, 31);
+            this.convertBtn.Size = new System.Drawing.Size(88, 31);
             this.convertBtn.TabIndex = 0;
             this.convertBtn.Text = "Convert";
             this.convertBtn.UseVisualStyleBackColor = true;
@@ -279,7 +279,7 @@
             this.panelText.Controls.Add(this.textExeFileName);
             this.panelText.Controls.Add(this.textClassName);
             this.panelText.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelText.Location = new System.Drawing.Point(146, 20);
+            this.panelText.Location = new System.Drawing.Point(153, 20);
             this.panelText.Name = "panelText";
             this.panelText.Padding = new System.Windows.Forms.Padding(5);
             this.panelText.Size = new System.Drawing.Size(168, 81);
@@ -310,7 +310,7 @@
             this.panelLabel.Location = new System.Drawing.Point(20, 20);
             this.panelLabel.Name = "panelLabel";
             this.panelLabel.Padding = new System.Windows.Forms.Padding(5, 10, 5, 5);
-            this.panelLabel.Size = new System.Drawing.Size(126, 81);
+            this.panelLabel.Size = new System.Drawing.Size(133, 81);
             this.panelLabel.TabIndex = 0;
             // 
             // label2
@@ -341,10 +341,10 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel2.Controls.Add(this.textOutput);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(510, 55);
+            this.panel2.Location = new System.Drawing.Point(527, 55);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(20);
-            this.panel2.Size = new System.Drawing.Size(283, 596);
+            this.panel2.Size = new System.Drawing.Size(438, 596);
             this.panel2.TabIndex = 3;
             // 
             // textOutput
@@ -354,7 +354,7 @@
             this.textOutput.Location = new System.Drawing.Point(20, 20);
             this.textOutput.Name = "textOutput";
             this.textOutput.ReadOnly = true;
-            this.textOutput.Size = new System.Drawing.Size(239, 552);
+            this.textOutput.Size = new System.Drawing.Size(394, 552);
             this.textOutput.TabIndex = 1;
             this.textOutput.Text = "";
             // 
@@ -362,7 +362,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(793, 651);
+            this.ClientSize = new System.Drawing.Size(965, 651);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);

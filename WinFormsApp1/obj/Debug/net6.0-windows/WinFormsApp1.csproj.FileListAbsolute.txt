@@ -4,6 +4,7 @@ F:\study\dactahinhthuc\ConvertLanguage\ConvertLanguage\WinFormsApp1\bin\Debug\ne
 F:\study\dactahinhthuc\ConvertLanguage\ConvertLanguage\WinFormsApp1\bin\Debug\net6.0-windows\WinFormsApp1.dll
 F:\study\dactahinhthuc\ConvertLanguage\ConvertLanguage\WinFormsApp1\bin\Debug\net6.0-windows\WinFormsApp1.pdb
 F:\study\dactahinhthuc\ConvertLanguage\ConvertLanguage\WinFormsApp1\obj\Debug\net6.0-windows\WinFormsApp1.csproj.AssemblyReference.cache
+F:\study\dactahinhthuc\ConvertLanguage\ConvertLanguage\WinFormsApp1\obj\Debug\net6.0-windows\WinFormsApp1.MainProject.resources
 F:\study\dactahinhthuc\ConvertLanguage\ConvertLanguage\WinFormsApp1\obj\Debug\net6.0-windows\WinFormsApp1.csproj.GenerateResource.cache
 F:\study\dactahinhthuc\ConvertLanguage\ConvertLanguage\WinFormsApp1\obj\Debug\net6.0-windows\WinFormsApp1.GeneratedMSBuildEditorConfig.editorconfig
 F:\study\dactahinhthuc\ConvertLanguage\ConvertLanguage\WinFormsApp1\obj\Debug\net6.0-windows\WinFormsApp1.AssemblyInfoInputs.cache
@@ -14,4 +15,3 @@ F:\study\dactahinhthuc\ConvertLanguage\ConvertLanguage\WinFormsApp1\obj\Debug\ne
 F:\study\dactahinhthuc\ConvertLanguage\ConvertLanguage\WinFormsApp1\obj\Debug\net6.0-windows\WinFormsApp1.pdb
 F:\study\dactahinhthuc\ConvertLanguage\ConvertLanguage\WinFormsApp1\obj\Debug\net6.0-windows\WinFormsApp1.genruntimeconfig.cache
 F:\study\dactahinhthuc\ConvertLanguage\ConvertLanguage\WinFormsApp1\obj\Debug\net6.0-windows\ref\WinFormsApp1.dll
-F:\study\dactahinhthuc\ConvertLanguage\ConvertLanguage\WinFormsApp1\obj\Debug\net6.0-windows\WinFormsApp1.MainProject.resources
