@@ -8,10 +8,10 @@ namespace WinFormsApp1
 {
     internal class StringAnalysis
     {
-        String[] lst;
         ListVariable variables = new ListVariable();
         NameFunction nameFunction = new NameFunction("");
-
+        Pre pre = new Pre("");
+        Post post = new Post("");
 
         public NameFunction GetNameFunction()
         {
@@ -22,25 +22,18 @@ namespace WinFormsApp1
         {
             return variables;
         }
-        public String[] GetString()
+
+
+        public StringAnalysis()
         {
-            return lst;
+            
         }
 
-        public StringAnalysis(String[] lst1)
-        {
-            lst = new String[lst1.Length];
-            lst1.CopyTo(lst,0);
-        }
+      
 
-        public void SetStringLST(String[] result) 
+        public void EncoderInputFirst(string[] temp)
         {
-            lst.CopyTo(result,0);
-        }
-
-        public void EncoderInputFirst(string temp)
-        {
-            string[] split = temp.Split('(');
+            string[] split = temp[0].Split('(');
             nameFunction.SetName(split[0]);
             string[] split2 = split[1].Split(')');
             string[] split3 = split2[0].Split(',');
@@ -52,9 +45,29 @@ namespace WinFormsApp1
             }
 
             string[] splitResult = split2[1].Split(':');
-            Variable newResult = new Variable(splitResult[0], splitResult[1]);
-            
-        }
+            variables.SetResult(splitResult[0], splitResult[1]);
+            //
+            string[] splitPre = temp[1].Split("pre");
 
+            pre.SetName(splitPre[1]);
+
+            string set = "";
+            for(int i = 2; i < temp.Length; i++)
+            {
+                set += temp[i];
+            }
+
+            string[] splitPost = set.Split("post");
+            post.SetName(splitPost[1]);
+            
+
+        }
+        public Pre GetPre() { return pre; }
+        public Post GetPost() { return post; }
+        public void Clear()
+        {
+            variables = new ListVariable();
+            nameFunction = new NameFunction("");
+        }
     }
 }

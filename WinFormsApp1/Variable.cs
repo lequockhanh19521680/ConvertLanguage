@@ -6,29 +6,19 @@ using System.Threading.Tasks;
 
 namespace WinFormsApp1
 {
-    internal class Variable
+    internal class Variable : Text
     {
-        string name;
         string dataType;
-        string color;
-
-        public Variable()
+        public Variable(string name1, string dataType) : base(name1)
         {
-            name = "";
-            dataType = "";
-        }
-        public Variable(string name1, string dataType)
-        {
-            name = name1;
-            color = "#6A4C9E";
+            dataType.Replace(" ", "");
             this.dataType = dataType;
         }
 
-        public string GetName() { return name; }
         public string GetDataType() { return dataType; }
-        public string GetColor() { return color; }
+        public override string GetColor() { return "Red"; }
+        public string GetColorDataType() { return "Blue"; }
 
-        public void SetName(String name) { this.name = name; }
         public void SetDatatype(String datatype) { this.dataType = datatype; }
 
     }

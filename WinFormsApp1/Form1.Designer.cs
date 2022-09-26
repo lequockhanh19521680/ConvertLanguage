@@ -47,18 +47,18 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.textInput = new System.Windows.Forms.TextBox();
+            this.textInput = new System.Windows.Forms.RichTextBox();
             this.panelContainer1 = new System.Windows.Forms.Panel();
             this.panelButton = new System.Windows.Forms.Panel();
             this.convertBtn = new System.Windows.Forms.Button();
             this.panelText = new System.Windows.Forms.Panel();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textExeFileName = new System.Windows.Forms.TextBox();
+            this.textClassName = new System.Windows.Forms.TextBox();
             this.panelLabel = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.ClassName = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.textOutput = new System.Windows.Forms.TextBox();
+            this.textOutput = new System.Windows.Forms.RichTextBox();
             this.menuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -230,13 +230,14 @@
             // 
             // textInput
             // 
+            this.textInput.BackColor = System.Drawing.SystemColors.Window;
             this.textInput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textInput.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.textInput.Location = new System.Drawing.Point(20, 20);
-            this.textInput.Multiline = true;
             this.textInput.Name = "textInput";
+            this.textInput.ReadOnly = true;
             this.textInput.Size = new System.Drawing.Size(424, 405);
-            this.textInput.TabIndex = 0;
+            this.textInput.TabIndex = 1;
+            this.textInput.Text = "";
             // 
             // panelContainer1
             // 
@@ -275,8 +276,8 @@
             // 
             // panelText
             // 
-            this.panelText.Controls.Add(this.textBox4);
-            this.panelText.Controls.Add(this.textBox3);
+            this.panelText.Controls.Add(this.textExeFileName);
+            this.panelText.Controls.Add(this.textClassName);
             this.panelText.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelText.Location = new System.Drawing.Point(146, 20);
             this.panelText.Name = "panelText";
@@ -284,21 +285,22 @@
             this.panelText.Size = new System.Drawing.Size(168, 81);
             this.panelText.TabIndex = 1;
             // 
-            // textBox4
+            // textExeFileName
             // 
-            this.textBox4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.textBox4.Location = new System.Drawing.Point(5, 49);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(158, 27);
-            this.textBox4.TabIndex = 1;
+            this.textExeFileName.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.textExeFileName.Location = new System.Drawing.Point(5, 49);
+            this.textExeFileName.Name = "textExeFileName";
+            this.textExeFileName.Size = new System.Drawing.Size(158, 27);
+            this.textExeFileName.TabIndex = 1;
             // 
-            // textBox3
+            // textClassName
             // 
-            this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox3.Location = new System.Drawing.Point(5, 5);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(158, 27);
-            this.textBox3.TabIndex = 0;
+            this.textClassName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textClassName.Location = new System.Drawing.Point(5, 5);
+            this.textClassName.Name = "textClassName";
+            this.textClassName.Size = new System.Drawing.Size(158, 27);
+            this.textClassName.TabIndex = 0;
+            this.textClassName.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // panelLabel
             // 
@@ -347,14 +349,14 @@
             // 
             // textOutput
             // 
+            this.textOutput.BackColor = System.Drawing.SystemColors.Window;
             this.textOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textOutput.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textOutput.Location = new System.Drawing.Point(20, 20);
-            this.textOutput.Multiline = true;
             this.textOutput.Name = "textOutput";
+            this.textOutput.ReadOnly = true;
             this.textOutput.Size = new System.Drawing.Size(239, 552);
-            this.textOutput.TabIndex = 0;
-            this.textOutput.TextChanged += new System.EventHandler(this.textOutput_TextChanged);
+            this.textOutput.TabIndex = 1;
+            this.textOutput.Text = "";
             // 
             // MainProject
             // 
@@ -374,7 +376,6 @@
             this.toolStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.panelContainer1.ResumeLayout(false);
             this.panelButton.ResumeLayout(false);
             this.panelText.ResumeLayout(false);
@@ -382,7 +383,6 @@
             this.panelLabel.ResumeLayout(false);
             this.panelLabel.PerformLayout();
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -408,17 +408,17 @@
         private ToolStripLabel toolStripLabel1;
         private Panel panel1;
         private Panel panel2;
-        private TextBox textOutput;
         private Panel panelContainer1;
         private Panel panelButton;
         private Panel panelText;
         private Panel panelLabel;
-        private TextBox textBox4;
-        private TextBox textBox3;
+        private TextBox textExeFileName;
+        private TextBox textClassName;
         private Label label2;
         private Label ClassName;
         private Panel panel3;
-        private TextBox textInput;
         private Button convertBtn;
+        private RichTextBox textInput;
+        private RichTextBox textOutput;
     }
 }

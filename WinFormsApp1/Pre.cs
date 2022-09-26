@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace WinFormsApp1
 {
-    internal class NameFunction : Text
+    internal class Pre : Text
     {
-
-        public NameFunction(string name) : base(name)
+        public Pre(string name) : base(name)
         {
         }
 
-        public override string GetColor() { return "Green"; }
+        public override string GetColor() { return "Gray"; }
+
     }
 }

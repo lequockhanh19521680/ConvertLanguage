@@ -14,7 +14,7 @@ namespace WinFormsApp1
         public ListVariable()
         {
             this.listVariable = new List<Variable>();
-            this.result = new Variable();
+            this.result = new Variable("","");
         }
         public ListVariable(List<Variable> listVariable, Variable result)
         {
@@ -23,11 +23,31 @@ namespace WinFormsApp1
         }
         public List<Variable> GetVariables() { return listVariable; }
 
+        public String DebugVariables()
+        {
+            String result = "";
+            foreach(Variable item in listVariable)
+            {
+                result = result + item.GetName() + ":";
+                result = result + item.GetDataType() ;
+            }
+            return result;
+        }
         public void PushNewVariable(Variable x)
         {
             listVariable.Add(x);
         }
         public Variable GetResult() { return result; }
+
+        public void SetResult(string name,string dataType)
+        {
+            result.SetName(name);
+            result.SetDatatype(dataType);
+        }
+
+        public int GetCountVariable() { return this.listVariable.Count; }
+
+       
 
     }
 }
