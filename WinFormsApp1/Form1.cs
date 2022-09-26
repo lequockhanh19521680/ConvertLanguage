@@ -1,3 +1,4 @@
+using System;
 using System.Text.RegularExpressions;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -135,15 +136,10 @@ namespace WinFormsApp1
 
             NhapText();
             XuatText();
+            CheckText();
 
             textOutput.AppendText("    }" + "\n");
             textOutput.AppendText("}");
-
-
-
-
-
-
 
         }
 
@@ -186,9 +182,46 @@ namespace WinFormsApp1
 
         private void XuatText()
         {
+            Variable variable = stringAnalysis.GetVariables().GetResult();
+
             AppendText(textOutput, "        public void ", Color.Blue);
             textOutput.AppendText("Xuat_" + stringAnalysis.GetNameFunction().GetName());
             textOutput.AppendText("(");
+            AppendText(textOutput, variable.GetRealDataType(variable.GetDataType()), Color.Blue);
+            textOutput.AppendText(" " + variable.GetName()+")" + "\n");
+            textOutput.AppendText("        {" + "\n");
+            AppendText(textOutput, "            Console", Color.Cyan);
+            textOutput.AppendText(".WriteLine(" + "\"" + "Ket qua la : {0}"+ "\"" +"," + variable.GetName() + ");" + "\n") ;
+            textOutput.AppendText("        }");
+            textOutput.AppendText("\n");
+
+        }
+
+        private void CheckText()
+        {
+            AppendText(textOutput, "        public int ", Color.Blue);
+            textOutput.AppendText("KiemTra_" + stringAnalysis.GetNameFunction().GetName());
+            textOutput.AppendText("(");
+            int index = 0;
+            foreach (Variable variable in stringAnalysis.GetVariables().GetVariables())
+            {
+                index++;
+                AppendText(textOutput,variable.GetRealDataType(variable.GetDataType()) + " ", Color.Blue);
+                textOutput.AppendText(variable.GetName());
+                if (index < stringAnalysis.GetVariables().GetCountVariable())
+                {
+                    textOutput.AppendText(",");
+                }
+            }
+            textOutput.AppendText(")" + "\n");
+            textOutput.AppendText("        {" + "\n");
+            string check = stringAnalysis.GetPre().GetName();
+            AppendText(textOutput,"            return " ,Color.Blue);
+            if (check == "") textOutput.AppendText("1 ;" + "\n");
+            else textOutput.AppendText(" (" + stringAnalysis.GetPre().GetName() + ") ; \n");
+            textOutput.AppendText("        }" + "\n");
+
+
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)

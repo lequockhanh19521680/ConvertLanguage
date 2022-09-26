@@ -25,7 +25,9 @@ namespace WinFormsApp1
                 case "R":
                     return "float";
                 case "N":
-                    return "integer";
+                    return "uint";
+                case "Z":
+                    return "int";
                 case "B":
                     return "bool";
                 case "R*":
