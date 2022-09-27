@@ -1,4 +1,7 @@
+using Microsoft.CSharp;
 using System;
+using System.CodeDom.Compiler;
+using System.Diagnostics;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using static System.Net.Mime.MediaTypeNames;
@@ -56,8 +59,27 @@ namespace WinFormsApp1
                     }
                 }
             }
-            
+            else if(convertBtn.Text == "Run")
+            {
+                RunCs(textOutput.Text);
+            }
+            else
+            {
+                MessageBox.Show("LÙﬁi cmnr");
+            }
+        }
 
+        private void RunCs(string code)// just C# 
+        {
+            CSharpCodeProvider codeProvider = new CSharpCodeProvider();
+            ICodeCompiler icc = codeProvider.CreateCompiler();
+            string Output = "Application.exe";
+            CompilerParameters parameters = new CompilerParameters();
+            parameters.GenerateExecutable = true;
+            parameters.OutputAssembly = Output;
+            CompilerResults results = icc.CompileAssemblyFromSource(parameters, code);
+
+            Process.Start(Output);
         }
         public static void AppendText(RichTextBox box, string text, Color color)
         {
@@ -303,8 +325,48 @@ namespace WinFormsApp1
                     textOutput.AppendText(",");
                 }
             }
-            textOutput.AppendText(") \n");
+            textOutput.AppendText(")\n");
 
+
+
+            AppendText(textOutput, "        if", Color.Blue);
+            textOutput.AppendText("(p.KiemTra_" + stringAnalysis.GetNameFunction().GetName() + "(");
+            index = 0;
+            foreach (Variable variable in stringAnalysis.GetVariables().GetVariables())
+            {
+                index++;
+                textOutput.AppendText(variable.GetName());
+                if (index < stringAnalysis.GetVariables().GetCountVariable())
+                {
+                    textOutput.AppendText(",");
+                }
+            }
+            textOutput.AppendText(")==1)\n");
+
+
+
+            textOutput.AppendText("        { \n");
+            textOutput.AppendText("            " + result.GetName() + " = " + "p."+stringAnalysis.GetNameFunction().GetName()+"(");
+
+
+            index = 0;
+            foreach (Variable variable in stringAnalysis.GetVariables().GetVariables())
+            {
+                index++;
+                textOutput.AppendText(variable.GetName());
+                if (index < stringAnalysis.GetVariables().GetCountVariable())
+                {
+                    textOutput.AppendText(",");
+                }
+            }
+            textOutput.AppendText("); \n");
+            textOutput.AppendText("            p.Xuat_" + stringAnalysis.GetNameFunction().GetName() + "(" + result.GetName() + ");\n");
+            textOutput.AppendText("        } \n");
+            AppendText(textOutput, "        else ", Color.Blue);
+            AppendText(textOutput, "Console", Color.Cyan);
+            textOutput.AppendText(".WriteLine(" + "\""+"Thong tin nhap vao khong hop le "+ "\"" + ");\n");
+            AppendText(textOutput, "        Console", Color.Cyan);
+            textOutput.AppendText(".ReadLine() \n");
 
             textOutput.AppendText("    } \n");
         }
