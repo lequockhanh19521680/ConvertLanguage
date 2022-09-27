@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -137,9 +138,11 @@ namespace WinFormsApp1
             NhapText();
             XuatText();
             CheckText();
-            ProcessFunctionText();
-
             textOutput.AppendText("    }" + "\n");
+
+            ProcessFunctionText();
+            MainFunction();
+
             textOutput.AppendText("}");
 
         }
@@ -237,11 +240,74 @@ namespace WinFormsApp1
         private void ProcessFunctionText()
         {
             Variable result = stringAnalysis.GetVariables().GetResult();
-            AppendText(textOutput, "        public " + stringAnalysis.GetVariables().GetResult().GetRealDataType(result.GetDataType()) +" ", Color.Blue);
+            AppendText(textOutput, "    public " + stringAnalysis.GetVariables().GetResult().GetRealDataType(result.GetDataType()) +" ", Color.Blue);
             textOutput.AppendText(stringAnalysis.GetNameFunction().GetName());
             textOutput.AppendText("(");
+            int index = 0;
+            foreach (Variable variable in stringAnalysis.GetVariables().GetVariables())
+            {
+                index++;
+                AppendText(textOutput, variable.GetRealDataType(variable.GetDataType()) + " ", Color.Blue);
+                textOutput.AppendText(variable.GetName());
+                if (index < stringAnalysis.GetVariables().GetCountVariable())
+                {
+                    textOutput.AppendText(",");
+                }
+            }
+            textOutput.AppendText(")" + "\n");
+            textOutput.AppendText("    {" + "\n");
+            AppendText(textOutput, "        " + result.GetRealDataType(result.GetDataType()) + " ", Color.Blue);
+            textOutput.AppendText(result.GetName() + result.InitVariable(result.GetDataType()) +"; \n");
+            AppendText(textOutput, "        return ",Color.Blue);
+            textOutput.AppendText(result.GetName() + "; \n" );
+            textOutput.AppendText("    }" + "\n");
+
         }
 
+
+        private void MainFunction()
+        {
+            AppendText(textOutput, "    public static void ", Color.Blue);
+            textOutput.AppendText("Main(");
+            AppendText(textOutput, "string[] ", Color.Blue);
+            textOutput.AppendText("args)" + "\n");
+
+
+            textOutput.AppendText("    { \n");
+
+            foreach (Variable variable in stringAnalysis.GetVariables().GetVariables())
+            {
+                AppendText(textOutput, "        " + variable.GetRealDataType(variable.GetDataType()) + " ",Color.Blue);
+                textOutput.AppendText(variable.GetName() + variable.InitVariable(variable.GetDataType()) + "; \n");
+            }
+            Variable result = stringAnalysis.GetVariables().GetResult();
+            AppendText(textOutput, "        " + result.GetRealDataType(result.GetDataType()) + " ", Color.Blue);
+            textOutput.AppendText(result.GetName() + result.InitVariable(result.GetDataType()) + "; \n");
+            textOutput.AppendText("\n");
+
+            AppendText(textOutput, "        Program", Color.Red);
+            textOutput.AppendText(" p = ");
+            AppendText(textOutput, "new ", Color.Blue);
+            AppendText(textOutput, "Program", Color.Red);
+            textOutput.AppendText("();\n");
+            textOutput.AppendText("        p.Nhap_" + stringAnalysis.GetNameFunction().GetName() + "(");
+
+            int index = 0;
+            foreach (Variable variable in stringAnalysis.GetVariables().GetVariables())
+            {
+                index++;
+                AppendText(textOutput, "ref ", Color.Blue);
+                textOutput.AppendText(variable.GetName());
+                if (index < stringAnalysis.GetVariables().GetCountVariable())
+                {
+                    textOutput.AppendText(",");
+                }
+            }
+            textOutput.AppendText(") \n");
+
+
+            textOutput.AppendText("    } \n");
+        }
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
 

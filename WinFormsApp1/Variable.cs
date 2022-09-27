@@ -33,8 +33,28 @@ namespace WinFormsApp1
                 case "R*":
                     SetIsArray(true);
                     return "float[]";
+                case "char*":
+                    return "string";
                 default:
                     return "";
+            }
+        }
+
+        public string InitVariable(string type)
+        {
+            switch (type)
+            {
+                case "R":
+                    return " = 0";
+                case "N":
+                    return " = 0";
+                case "Z":
+                    return " = 0";
+                case "B":
+                    return " = False";
+                case "char*":
+                    return "";
+                default: return "";
             }
         }
 
