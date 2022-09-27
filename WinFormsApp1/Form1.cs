@@ -137,6 +137,7 @@ namespace WinFormsApp1
             NhapText();
             XuatText();
             CheckText();
+            ProcessFunctionText();
 
             textOutput.AppendText("    }" + "\n");
             textOutput.AppendText("}");
@@ -216,12 +217,29 @@ namespace WinFormsApp1
             textOutput.AppendText(")" + "\n");
             textOutput.AppendText("        {" + "\n");
             string check = stringAnalysis.GetPre().GetName();
-            AppendText(textOutput,"            return " ,Color.Blue);
-            if (check == "") textOutput.AppendText("1 ;" + "\n");
-            else textOutput.AppendText(" (" + stringAnalysis.GetPre().GetName() + ") ; \n");
+            if (check == "")
+            {
+                AppendText(textOutput, "            return ", Color.Blue);
+                textOutput.AppendText("1 ;" + "\n");
+            }
+            else
+            {
+                textOutput.AppendText("            if (" + stringAnalysis.GetPre().GetName() + ") ");
+                AppendText(textOutput, "return ", Color.Blue);
+                textOutput.AppendText(" 1; \n");
+                textOutput.AppendText("            else " );
+                AppendText(textOutput, "return ", Color.Blue);
+                textOutput.AppendText("0;" + "\n");
+            }
             textOutput.AppendText("        }" + "\n");
+        }
 
-
+        private void ProcessFunctionText()
+        {
+            Variable result = stringAnalysis.GetVariables().GetResult();
+            AppendText(textOutput, "        public " + stringAnalysis.GetVariables().GetResult().GetRealDataType(result.GetDataType()) +" ", Color.Blue);
+            textOutput.AppendText(stringAnalysis.GetNameFunction().GetName());
+            textOutput.AppendText("(");
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
