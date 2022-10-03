@@ -4,6 +4,8 @@ using System.CodeDom.Compiler;
 using System.Diagnostics;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using Microsoft.CSharp;
+using Microsoft.VisualBasic;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace WinFormsApp1
@@ -70,7 +72,7 @@ namespace WinFormsApp1
         }
 
         private void RunCs(string code)// just C# 
-        {
+        {;
             CSharpCodeProvider codeProvider = new CSharpCodeProvider();
             ICodeCompiler icc = codeProvider.CreateCompiler();
             string Output = @"Application.exe";
@@ -79,7 +81,7 @@ namespace WinFormsApp1
             parameters.OutputAssembly = Output;
             CompilerResults results = icc.CompileAssemblyFromSource(parameters, code);
 
-            Process.Start(Output);
+            //Process.Start(Output);
         }
         public static void AppendText(RichTextBox box, string text, Color color)
         {

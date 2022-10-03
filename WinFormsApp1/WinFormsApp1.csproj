@@ -12,4 +12,8 @@
     <None Remove="StringAnalysis.cs~RF1f8b32f.TMP" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.3.1" />
+  </ItemGroup>
+
 </Project>
