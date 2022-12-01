@@ -1,3 +1,0 @@
-Ham (a:R*, n:N)kq:R
-pre 
-post 	kq = (VM i TH {1..n-1}.kq = kq + a(i))
