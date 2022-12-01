@@ -52,7 +52,7 @@ namespace ConvertLanguage
                 case "B":
                     return " = false";
                 case "char*":
-                    return "";
+                    return " = \"\"";
                 default: return "";
             }
         }

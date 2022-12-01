@@ -49,7 +49,7 @@ namespace ConvertLanguage
             string[] splitResult = split2[1].Split(':');
             variables.SetResult(splitResult[0], splitResult[1]);
             //
-            string[] splitPre = temp[1].Split('e');
+            string[] splitPre = temp[1].Split(new string[] { "pre" }, StringSplitOptions.None);
 
             pre.SetName(splitPre[1]);
 
@@ -59,8 +59,8 @@ namespace ConvertLanguage
                 set += temp[i];
             }
 
-            string[] splitPost = set.Split('t');
-            post.SetName(splitPost[1]);
+            string[] splitPost = set.Split(new string[] { "post" }, StringSplitOptions.None);
+            post.SetName(splitPost[1].ToLower());
         }
         public Pre GetPre() { return pre; }
         public Post GetPost() { return post; }
