@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ConvertLanguage
 {
@@ -78,21 +79,54 @@ namespace ConvertLanguage
             AppendText(textInput, NameFunction, colorNameFunction);
             textInput.AppendText("(");
             int index = 0;
-            foreach (Variable variable in stringAnalysis.GetVariables().GetVariables())
+            if (!(stringAnalysis.GetVariables().ConTainArray()))
             {
-                index++;
-                Color colorVariableName = Color.FromName(variable.GetColor());
-                Color colorVariableType = Color.FromName(variable.GetColorDataType());
-
-                AppendText(textInput, variable.GetName(), colorVariableName);
-                textInput.AppendText(":");
-                AppendText(textInput, variable.GetDataType().Trim(), colorVariableType);
-                if (index < stringAnalysis.GetVariables().GetCountVariable())
+                foreach (Variable variable in stringAnalysis.GetVariables().GetVariables())
                 {
-                    textInput.AppendText(",");
-                }
+                    index++;
+                    Color colorVariableName = Color.FromName(variable.GetColor());
+                    Color colorVariableType = Color.FromName(variable.GetColorDataType());
 
+                    AppendText(textInput, variable.GetName(), colorVariableName);
+                    textInput.AppendText(":");
+                    AppendText(textInput, variable.GetDataType().Trim(), colorVariableType);
+                    if (index < stringAnalysis.GetVariables().GetCountVariable())
+                    {
+                        textInput.AppendText(",");
+                    }
+
+                }
             }
+            else
+            {
+                Variable variableArray = stringAnalysis.GetVariables().GetVariableArray();
+                {
+
+                    Color colorVariableName = Color.FromName(variableArray.GetColor());
+                    Color colorVariableType = Color.FromName(variableArray.GetColorDataType());
+                    AppendText(textInput, variableArray.GetName(), colorVariableName);
+                    textInput.AppendText(":");
+                    AppendText(textInput, variableArray.GetDataType().Trim(), colorVariableType);
+                    textInput.AppendText(",");
+
+                }
+                foreach (Variable variable in stringAnalysis.GetVariables().GetVariables())
+                {
+                    index++;
+                    Color colorVariableName = Color.FromName(variable.GetColor());
+                    Color colorVariableType = Color.FromName(variable.GetColorDataType());
+
+                    AppendText(textInput, variable.GetName(), colorVariableName);
+                    textInput.AppendText(":");
+                    AppendText(textInput, variable.GetDataType().Trim(), colorVariableType);
+                    if (index < stringAnalysis.GetVariables().GetCountVariable())
+                    {
+                        textInput.AppendText(",");
+                    }
+
+                }
+            }
+            
             textInput.AppendText(")");
 
             Variable result = new Variable(stringAnalysis.GetVariables().GetResult().GetName(), stringAnalysis.GetVariables().GetResult().GetDataType());
@@ -154,8 +188,19 @@ namespace ConvertLanguage
             textOutput.AppendText("(");
 
             int index = 0;
+            if (stringAnalysis.GetVariables().ConTainArray())
+            {
+                var variableArray = stringAnalysis.GetVariables().GetVariableArray();
+                AppendText(textOutput, "ref " + variableArray.GetRealDataType(variableArray.GetDataType()), Color.Blue);
+                textOutput.AppendText(" ");
+                textOutput.AppendText(variableArray.GetName());
+
+                textOutput.AppendText(",");
+            }
+            
             foreach (Variable variable in stringAnalysis.GetVariables().GetVariables())
             {
+             
                 index++;
                 AppendText(textOutput, "ref " + variable.GetRealDataType(variable.GetDataType()), Color.Blue);
                 textOutput.AppendText(" ");
@@ -170,13 +215,33 @@ namespace ConvertLanguage
 
             foreach (Variable variable in stringAnalysis.GetVariables().GetVariables())
             {
-                AppendText(textOutput, Tab(3)+ "Console", Color.Cyan);
-                textOutput.AppendText(".WriteLine" + "(" + "\"" + "Nhap " + variable.GetName() + " : " + "\"); " + "\n");
-                textOutput.AppendText(Tab(3) + variable.GetName() + " = ");
-                AppendText(textOutput, variable.GetRealDataType(variable.GetDataType()), Color.Blue);
+               
+                    AppendText(textOutput, Tab(3) + "Console", Color.Cyan);
+                    textOutput.AppendText(".WriteLine" + "(" + "\"" + "Nhap " + variable.GetName() + " : " + "\"); " + "\n");
+                    textOutput.AppendText(Tab(3) + variable.GetName() + " = ");
+                    AppendText(textOutput, variable.GetRealDataType(variable.GetDataType()), Color.Blue);
+                    textOutput.AppendText(".Parse(");
+                    AppendText(textOutput, "Console", Color.Cyan);
+                    textOutput.AppendText(".ReadLine());" + "\n");                
+           
+            }
+            if (stringAnalysis.GetVariables().ConTainArray())
+            {
+                Variable variable_array = stringAnalysis.GetVariables().GetVariableArray();
+                var variables = stringAnalysis.GetVariables();
+                AppendText(textOutput, Tab(3)+"for " , Color.Blue);
+                textOutput.AppendText("( int i = 0; i < " + variables.GetVariables()[0].GetName()+"; i++ ) \n");
+                textOutput.AppendText(Tab(3) + "{" + "\n");
+
+                textOutput.AppendText(Tab(4) + variable_array.GetName() + "[i] = ");
+                AppendText(textOutput, variable_array.GetDataTypeInArray(), Color.Blue);
+
                 textOutput.AppendText(".Parse(");
                 AppendText(textOutput, "Console", Color.Cyan);
                 textOutput.AppendText(".ReadLine());" + "\n");
+                textOutput.AppendText(Tab(3) + "}" + "\n");
+
+
             }
             textOutput.AppendText(Tab(2)+"}" + "\n");
         }
@@ -206,6 +271,15 @@ namespace ConvertLanguage
             textOutput.AppendText("KiemTra_" + stringAnalysis.GetNameFunction().GetName());
             textOutput.AppendText("(");
             int index = 0;
+            if (stringAnalysis.GetVariables().ConTainArray())
+            {
+                var variableArray = stringAnalysis.GetVariables().GetVariableArray();
+                AppendText(textOutput, variableArray.GetRealDataType(variableArray.GetDataType()), Color.Blue);
+                textOutput.AppendText(" ");
+                textOutput.AppendText(variableArray.GetName());
+
+                textOutput.AppendText(",");
+            }
             foreach (Variable variable in stringAnalysis.GetVariables().GetVariables())
             {
                 index++;
@@ -227,7 +301,9 @@ namespace ConvertLanguage
             }
             else
             {
-                textOutput.AppendText(Tab(3)+"if (" + stringAnalysis.GetPre().GetName() + ") ");
+                AppendText(textOutput, Tab(3) + "if", Color.Blue);
+
+                textOutput.AppendText(" (" + stringAnalysis.GetPre().GetName() + ") ");
                 AppendText(textOutput, "return ", Color.Blue);
                 textOutput.AppendText(" 1; \n");
                 textOutput.AppendText(Tab(3)+"else ");
@@ -245,6 +321,15 @@ namespace ConvertLanguage
             textOutput.AppendText(stringAnalysis.GetNameFunction().GetName());
             textOutput.AppendText("(");
             int index = 0;
+            if (stringAnalysis.GetVariables().ConTainArray())
+            {
+                var variableArray = stringAnalysis.GetVariables().GetVariableArray();
+                AppendText(textOutput, " " + variableArray.GetRealDataType(variableArray.GetDataType()), Color.Blue);
+                textOutput.AppendText(" ");
+                textOutput.AppendText(variableArray.GetName());
+
+                textOutput.AppendText(",");
+            }
             foreach (Variable variable in stringAnalysis.GetVariables().GetVariables())
             {
                 index++;
@@ -258,11 +343,86 @@ namespace ConvertLanguage
             textOutput.AppendText(")" + "\n");
             textOutput.AppendText(Tab(2)+"{" + "\n");
             //float c = 0
-            AppendText(textOutput, Tab(3) + result.GetRealDataType(result.GetDataType()) + " ", Color.Blue);
+            if (!post.GetName().Contains("vmith"))
+            {
+                AppendText(textOutput, Tab(3) + result.GetRealDataType(result.GetDataType()) + " ", Color.Blue);
 
-            textOutput.AppendText(result.GetName() + result.InitVariable(result.GetDataType()) + "; \n");
+                textOutput.AppendText(result.GetName() + result.InitVariable(result.GetDataType()) + "; \n");
+            }
+            else
+            {
+                AppendText(textOutput, Tab(3) + result.GetRealDataType(result.GetDataType()) + " ", Color.Blue);
+
+                textOutput.AppendText(result.GetName() + " = true" + "; \n");
+            }
+        
+
+
+            //Xu li neu no la loop
+            if (post.GetName().Contains("vmith"))
+            {
+                //string[] splitPre = temp[1].Split(new string[] { "pre" }, StringSplitOptions.None);
+
+                string[] tempPost = post.GetName().Split(new string[] { "vmith{" },StringSplitOptions.None);
+                string ForPost = tempPost[1].Split('}')[0];
+                string LogicPost = post.GetName().Split(new string[] { "}." }, StringSplitOptions.None)[1];
+                LogicPost = LogicPost.Replace("))", ")");
+                LogicPost = LogicPost.Replace("(", "[");
+                LogicPost = LogicPost.Replace(")", "]");
+                bool flag = false;
+                if (!flag)
+                {
+                    LogicPost = LogicPost.Replace("<=", ">");
+                    flag = true;
+                };
+                if (!flag)
+                {
+                    LogicPost = LogicPost.Replace(">=", "<");
+                    flag = true;
+                };
+                if (!flag)
+                {
+                    LogicPost = LogicPost.Replace("<", ">");
+                    flag = true;
+                };
+                if (!flag)
+                {
+                    LogicPost = LogicPost.Replace(">", "<");
+                    flag = true;
+                };
+
+
+                string[] processForPost = ForPost.Split(new string[] { ".." }, StringSplitOptions.None);
+                string indexFirst = processForPost[0];
+                string indexLast = processForPost[1];
+                //MessageBox.Show(indexFirst+"           "+ indexLast+"             "+LogicPost);
+                AppendText(textOutput, Tab(3) +"for", Color.Blue);
+                textOutput.AppendText("(");
+                AppendText(textOutput, "int ", Color.Blue);
+
+
+                textOutput.AppendText("i = " + (int.Parse(indexFirst)-1).ToString() + "; i <= " + indexLast + ";i++)\n");
+                textOutput.AppendText(Tab(3)+"{\n");
+                //xu li main
+                if(result.GetDataType() == "B")
+                {
+                    AppendText(textOutput, Tab(4) + "if ", Color.Blue);
+
+                    textOutput.AppendText("(" + LogicPost+")\n");
+                    AppendText(textOutput, Tab(5) + "return ", Color.Blue);
+
+                    textOutput.AppendText("false; \n");
+                    AppendText(textOutput, Tab(4) + "else break;\n ", Color.Blue);
+
+                    textOutput.AppendText(Tab(3) + "}\n");
+
+                }
+
+
+
+            }
             //Xu li neu no la ham return
-            if (post.IsPostReturn())
+            else if (post.IsPostReturn())
             {
                 string postRemoveFirst = post.GetName().Split('(')[1];
                 string postFinally = postRemoveFirst.Split(')')[0];
@@ -275,7 +435,9 @@ namespace ConvertLanguage
                 string[] processing = post.GetName().Split(new string[] { "||" }, StringSplitOptions.None);
                 foreach(string f in processing)
                 {
-                    textOutput.AppendText(Tab(3) + "if"+post.AnalysisPostNotReturn(f, result.GetName()));
+                    AppendText(textOutput, Tab(3) + "if ", Color.Blue);
+
+                    textOutput.AppendText(post.AnalysisPostNotReturn(f, result.GetName()));
                 }
 
 
@@ -291,6 +453,7 @@ namespace ConvertLanguage
 
         private void MainFunction()
         {
+            //Khai bao bien
             AppendText(textOutput, Tab(2)+"public static void ", Color.Blue);
             textOutput.AppendText("Main(");
             AppendText(textOutput, "string[] ", Color.Blue);
@@ -304,7 +467,23 @@ namespace ConvertLanguage
             Variable result = stringAnalysis.GetVariables().GetResult();
             AppendText(textOutput, Tab(3) + result.GetRealDataType(result.GetDataType()) + " ", Color.Blue);
             textOutput.AppendText(result.GetName() + result.InitVariable(result.GetDataType()) + "; \n");
-            textOutput.AppendText("\n");
+
+            if (stringAnalysis.GetVariables().ConTainArray())
+            {
+                Variable variable_array = stringAnalysis.GetVariables().GetVariableArray();
+
+                AppendText(textOutput, Tab(3)+ variable_array.GetRealDataType(variable_array.GetDataType()) + " ", Color.Blue);
+
+                textOutput.AppendText(variable_array.GetName() + " = ");
+                AppendText(textOutput, "new " + variable_array.GetDataTypeInArray(), Color.Blue);
+                textOutput.AppendText("[100];\n\n");
+
+
+            }
+            int index = 0;
+
+           
+            //Khai bao class
 
             AppendText(textOutput, Tab(3) + textClassName.Text, Color.Red);
             textOutput.AppendText(" p = ");
@@ -312,14 +491,20 @@ namespace ConvertLanguage
             AppendText(textOutput, textClassName.Text, Color.Red);
             textOutput.AppendText("();\n");
             textOutput.AppendText(Tab(3)+"p.Nhap_" + stringAnalysis.GetNameFunction().GetName() + "(");
-
-            int index = 0;
+            if (stringAnalysis.GetVariables().ConTainArray())
+            {
+                var variableArray = stringAnalysis.GetVariables().GetVariableArray();
+                AppendText(textOutput, "ref ", Color.Blue);
+                textOutput.AppendText(variableArray.GetName());
+                textOutput.AppendText(",");
+            }
+            int index2 = 0;
             foreach (Variable variable in stringAnalysis.GetVariables().GetVariables())
             {
-                index++;
+                index2++;
                 AppendText(textOutput, "ref ", Color.Blue);
                 textOutput.AppendText(variable.GetName());
-                if (index < stringAnalysis.GetVariables().GetCountVariable())
+                if (index2 < stringAnalysis.GetVariables().GetCountVariable())
                 {
                     textOutput.AppendText(",");
                 }
@@ -331,6 +516,12 @@ namespace ConvertLanguage
             AppendText(textOutput, Tab(3)+"if", Color.Blue);
             textOutput.AppendText("(p.KiemTra_" + stringAnalysis.GetNameFunction().GetName() + "(");
             index = 0;
+            if (stringAnalysis.GetVariables().ConTainArray())
+            {
+                var variableArray = stringAnalysis.GetVariables().GetVariableArray();
+                textOutput.AppendText(variableArray.GetName());
+                textOutput.AppendText(",");
+            }
             foreach (Variable variable in stringAnalysis.GetVariables().GetVariables())
             {
                 index++;
@@ -349,6 +540,12 @@ namespace ConvertLanguage
 
 
             index = 0;
+            if (stringAnalysis.GetVariables().ConTainArray())
+            {
+                var variableArray = stringAnalysis.GetVariables().GetVariableArray();
+                textOutput.AppendText(variableArray.GetName());
+                textOutput.AppendText(",");
+            }
             foreach (Variable variable in stringAnalysis.GetVariables().GetVariables())
             {
                 index++;
@@ -369,10 +566,7 @@ namespace ConvertLanguage
 
             textOutput.AppendText(Tab(2)+"} \n");
         }
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+      
 
    
 
@@ -423,6 +617,16 @@ namespace ConvertLanguage
             textInput.Text = "";
             textOutput.Text = "";
             ChangeColorInput();
+        }
+
+        private void textClassName_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

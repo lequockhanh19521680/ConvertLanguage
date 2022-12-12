@@ -9,14 +9,20 @@ namespace ConvertLanguage
     internal class Variable : Text
     {
         string dataType;
+        string dataTypeInArray;
         bool isArray;
         public Variable(string name1, string dataType) : base(name1)
         {
+            dataTypeInArray = "";
             SetDatatype(dataType);
             this.dataType = dataType;
             isArray = false;
+            if(dataType.Contains('*')) { 
+                isArray = true;
+                dataTypeInArray = dataType.Split('*')[0];
+            }
         }
-
+        public string GetDataTypeInArray() { return dataTypeInArray; }
         public string GetRealDataType(string type)
         {
             switch (type)
@@ -30,10 +36,17 @@ namespace ConvertLanguage
                 case "B":
                     return "bool";
                 case "R*":
-                    SetIsArray(true);
+                    dataTypeInArray = "float";
                     return "float[]";
                 case "char*":
+                    dataTypeInArray = "char";
                     return "string";
+                case "N*":
+                    dataTypeInArray = "uint";
+                    return "uint";
+                case "Z*":
+                    dataTypeInArray = "int";
+                    return "int";
                 default:
                     return "";
             }
@@ -53,6 +66,7 @@ namespace ConvertLanguage
                     return " = false";
                 case "char*":
                     return " = \"\"";
+                
                 default: return "";
             }
         }

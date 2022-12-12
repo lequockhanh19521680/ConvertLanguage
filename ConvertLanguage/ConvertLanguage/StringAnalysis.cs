@@ -43,7 +43,13 @@ namespace ConvertLanguage
             {
                 string[] split4 = s.Split(':');
                 Variable newTemp = new Variable(split4[0], split4[1]);
-                variables.PushNewVariable(newTemp);
+                if (newTemp.GetIsArray()) {
+                    variables.SetVariableArray(newTemp.GetName(),newTemp.GetDataType());
+                }
+                else
+                {
+                    variables.PushNewVariable(newTemp);
+                }
             }
 
             string[] splitResult = split2[1].Split(':');

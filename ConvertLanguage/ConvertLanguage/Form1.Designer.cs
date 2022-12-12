@@ -258,6 +258,7 @@
             this.textClassName.Name = "textClassName";
             this.textClassName.Size = new System.Drawing.Size(107, 27);
             this.textClassName.TabIndex = 0;
+            this.textClassName.TextChanged += new System.EventHandler(this.textClassName_TextChanged);
             // 
             // panel6
             // 
@@ -331,6 +332,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);

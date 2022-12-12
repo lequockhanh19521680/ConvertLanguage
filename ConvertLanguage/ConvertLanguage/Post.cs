@@ -12,6 +12,11 @@ namespace ConvertLanguage
         public Post(string name1) : base(name1)
         {
         }
+
+        public bool IsPostLoop()
+        {
+            return !(name.Contains("vmith"));
+        }
         public bool IsPostReturn()
         {
             return !(name.Contains("&&"));
@@ -59,11 +64,11 @@ namespace ConvertLanguage
             string result = "";
             if (maybe != "")
             {
-                result = "("+ condition + maybe + "\n" + "            " + process + ";" + "\n";
+                result = "("+ condition + maybe + "\n" + "                " + process + ";" + "\n";
             }
             else
             {
-                result = condition + "\n" + "            " + process + ";" + "\n";
+                result = condition + "\n" + "                " + process + ";" + "\n";
 
             }
 

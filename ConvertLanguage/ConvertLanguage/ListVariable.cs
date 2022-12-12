@@ -9,20 +9,24 @@ namespace ConvertLanguage
     internal class ListVariable
     {
         List<Variable> listVariable;
+        Variable variableArray;
         Variable result;
 
         public ListVariable()
         {
             this.listVariable = new List<Variable>();
-            this.result = new Variable("", "");
+            this.variableArray = new Variable("","");
+
+            this.result = new Variable("","");
         }
-        public ListVariable(List<Variable> listVariable, Variable result)
+        public ListVariable(List<Variable> listVariable, Variable result, Variable variableArray)
         {
             this.listVariable = listVariable;
             this.result = result;
+            this.variableArray = variableArray;
         }
         public List<Variable> GetVariables() { return listVariable; }
-
+        public Variable GetVariableArray() { return variableArray; }
         public String DebugVariables()
         {
             String result = "";
@@ -45,6 +49,15 @@ namespace ConvertLanguage
             result.SetDatatype(dataType);
         }
 
+        public void SetVariableArray(string name, string dataType)
+        {
+            variableArray.SetName(name);
+            variableArray.SetDatatype(dataType);
+        }
+        public bool ConTainArray()
+        {
+            return !((variableArray.GetDataType() == ""));
+        }
         public int GetCountVariable() { return this.listVariable.Count; }
 
 
