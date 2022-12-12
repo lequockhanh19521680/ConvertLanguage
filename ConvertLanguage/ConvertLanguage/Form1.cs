@@ -343,10 +343,9 @@ namespace ConvertLanguage
             textOutput.AppendText(")" + "\n");
             textOutput.AppendText(Tab(2)+"{" + "\n");
             //float c = 0
-            if (!post.GetName().Contains("vmith"))
+            if (result.GetDataType() != "B")
             {
                 AppendText(textOutput, Tab(3) + result.GetRealDataType(result.GetDataType()) + " ", Color.Blue);
-
                 textOutput.AppendText(result.GetName() + result.InitVariable(result.GetDataType()) + "; \n");
             }
             else
@@ -404,17 +403,23 @@ namespace ConvertLanguage
                 textOutput.AppendText("i = " + (int.Parse(indexFirst)-1).ToString() + "; i <= " + indexLast + ";i++)\n");
                 textOutput.AppendText(Tab(3)+"{\n");
                 //xu li main
-                if(result.GetDataType() == "B")
+                if (result.GetDataType() == "B")
                 {
                     AppendText(textOutput, Tab(4) + "if ", Color.Blue);
 
-                    textOutput.AppendText("(" + LogicPost+")\n");
+                    textOutput.AppendText("(" + LogicPost + ")\n");
                     AppendText(textOutput, Tab(5) + "return ", Color.Blue);
 
                     textOutput.AppendText("false; \n");
                     AppendText(textOutput, Tab(4) + "else break;\n ", Color.Blue);
 
                     textOutput.AppendText(Tab(3) + "}\n");
+
+                }
+                else
+                {
+                    textOutput.AppendText(Tab(4) + LogicPost + ";\n");
+                    textOutput.AppendText(Tab(3) +"}\n");
 
                 }
 
@@ -621,12 +626,56 @@ namespace ConvertLanguage
 
         private void textClassName_TextChanged(object sender, EventArgs e)
         {
-            
+            if ((textClassName.Text.Contains('0')) || (textClassName.Text.Contains('1')) || (textClassName.Text.Contains('2')) || (textClassName.Text.Contains('3')) || (textClassName.Text.Contains('4')) || (textClassName.Text.Contains('5')) || (textClassName.Text.Contains('6')) || (textClassName.Text.Contains('7')) || (textClassName.Text.Contains('8')) || (textClassName.Text.Contains('9')))
+            {
+                MessageBox.Show("KHONG THE NHAP SO");
+                textClassName.Text = "";
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            textInput.Text = "";
+            textClassName.Text = "";
+            textOutput.Text = "";
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            stringAnalysis.Clear();
+            if (openFile.ShowDialog() == DialogResult.OK)
+            {
+                convertBtn.Text = "Convert";
+                textInput.Text = File.ReadAllText(openFile.FileName.ToString());
+            }
+
+            stringAnalysis.EncoderInputFirst(textInput.Text.Split(new Char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries));
+            textInput.Text = "";
+            textOutput.Text = "";
+            ChangeColorInput();
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            textInput.Text = "";
+            textClassName.Text = "";
+            textOutput.Text = "";
         }
     }
 }
