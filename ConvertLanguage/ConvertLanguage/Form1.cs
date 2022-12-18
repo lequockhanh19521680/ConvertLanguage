@@ -164,7 +164,6 @@ namespace ConvertLanguage
             AppendText(textOutput, "namespace ", Color.Blue);
             textOutput.AppendText("FormalSpecification" + "\n");
             textOutput.AppendText("{" + "\n");
-
             AppendText(textOutput, "    public class ", Color.Blue);
             AppendText(textOutput, textClassName.Text + "\n", Color.Red);
             textOutput.AppendText("    {" + "\n");
@@ -174,8 +173,8 @@ namespace ConvertLanguage
             CheckText();
             ProcessFunctionText();
             MainFunction();
-            textOutput.AppendText("    }" + "\n");
 
+            textOutput.AppendText("    }" + "\n");
             textOutput.AppendText("}");
 
         }
@@ -233,6 +232,14 @@ namespace ConvertLanguage
                 textOutput.AppendText("( int i = 0; i < " + variables.GetVariables()[0].GetName()+"; i++ ) \n");
                 textOutput.AppendText(Tab(3) + "{" + "\n");
 
+                //Console.WriteLine("Nhap phan tu thu {0}: ",i+1);
+                AppendText(textOutput, Tab(4)+"Console", Color.Cyan);
+                textOutput.AppendText(".WriteLine(" + "\""+ "Nhap phan tu thu {0} cua mang :" + "\""+ ", i+1 );\n");
+
+
+
+                //a[i] = float.Parse(Console.ReadLine());
+
                 textOutput.AppendText(Tab(4) + variable_array.GetName() + "[i] = ");
                 AppendText(textOutput, variable_array.GetDataTypeInArray(), Color.Blue);
 
@@ -245,9 +252,6 @@ namespace ConvertLanguage
             }
             textOutput.AppendText(Tab(2)+"}" + "\n");
         }
-
-
-
         private void XuatText()
         {
             Variable variable = stringAnalysis.GetVariables().GetResult();
@@ -264,7 +268,6 @@ namespace ConvertLanguage
             textOutput.AppendText("\n");
 
         }
-
         private void CheckText()
         {
             AppendText(textOutput, Tab(2)+"public int ", Color.Blue);
@@ -312,7 +315,6 @@ namespace ConvertLanguage
             }
             textOutput.AppendText(Tab(2)+"}" + "\n");
         }
-
         private void ProcessFunctionText()
         {
             Variable result = stringAnalysis.GetVariables().GetResult();
@@ -381,12 +383,12 @@ namespace ConvertLanguage
                 };
                 if (!flag)
                 {
-                    LogicPost = LogicPost.Replace("<", ">");
+                    LogicPost = LogicPost.Replace("<", ">=");
                     flag = true;
                 };
                 if (!flag)
                 {
-                    LogicPost = LogicPost.Replace(">", "<");
+                    LogicPost = LogicPost.Replace(">", "<=");
                     flag = true;
                 };
 
@@ -400,7 +402,7 @@ namespace ConvertLanguage
                 AppendText(textOutput, "int ", Color.Blue);
 
 
-                textOutput.AppendText("i = " + (int.Parse(indexFirst)-1).ToString() + "; i <= " + indexLast + ";i++)\n");
+                textOutput.AppendText("i = " + (int.Parse(indexFirst)-1).ToString() + "; i < " + indexLast + ";i++)\n");
                 textOutput.AppendText(Tab(3)+"{\n");
                 //xu li main
                 if (result.GetDataType() == "B")
@@ -408,10 +410,13 @@ namespace ConvertLanguage
                     AppendText(textOutput, Tab(4) + "if ", Color.Blue);
 
                     textOutput.AppendText("(" + LogicPost + ")\n");
+                    textOutput.AppendText(Tab(4)+"{ \n");
+
                     AppendText(textOutput, Tab(5) + "return ", Color.Blue);
 
                     textOutput.AppendText("false; \n");
-                    AppendText(textOutput, Tab(4) + "else break;\n ", Color.Blue);
+                    AppendText(textOutput, Tab(5) + "break;\n ", Color.Blue);
+                    AppendText(textOutput, Tab(4) + "}\n ", Color.Blue);
 
                     textOutput.AppendText(Tab(3) + "}\n");
 
@@ -454,8 +459,6 @@ namespace ConvertLanguage
             textOutput.AppendText(Tab(2)+"}" + "\n");
 
         }
-
-
         private void MainFunction()
         {
             //Khai bao bien
@@ -626,9 +629,9 @@ namespace ConvertLanguage
 
         private void textClassName_TextChanged(object sender, EventArgs e)
         {
-            if ((textClassName.Text.Contains('0')) || (textClassName.Text.Contains('1')) || (textClassName.Text.Contains('2')) || (textClassName.Text.Contains('3')) || (textClassName.Text.Contains('4')) || (textClassName.Text.Contains('5')) || (textClassName.Text.Contains('6')) || (textClassName.Text.Contains('7')) || (textClassName.Text.Contains('8')) || (textClassName.Text.Contains('9')))
+            if ((textClassName.Text.Contains('0')) || (textClassName.Text.Contains('1')) || (textClassName.Text.Contains('2')) || (textClassName.Text.Contains('3')) || (textClassName.Text.Contains('4')) || (textClassName.Text.Contains('5')) || (textClassName.Text.Contains('6')) || (textClassName.Text.Contains('7')) || (textClassName.Text.Contains('8')) || (textClassName.Text.Contains('9')) || (textClassName.Text.Contains(' ')))
             {
-                MessageBox.Show("KHONG THE NHAP SO");
+                MessageBox.Show("Không thể nhập số và có khoảng trống");
                 textClassName.Text = "";
             }
         }
